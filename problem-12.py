@@ -1,22 +1,12 @@
-from itertools import count
-
-memo = {}
-
-def sumNumberUntilZero(cur, num):
-    if num == 0:
-        return cur
-    if memo.get(num):
-        return cur + memo.get(num)
-    return sumNumberUntilZero(cur + num, num - 1)
-
-def triangularNumberGenerator():
-    for number in count(1):
-        num = sumNumberUntilZero(0, number)
-        memo[number] = num
-        yield num
+def triangularNumberGenerator(init):
+    triangle = 1
+    while True:
+        init += 1
+        triangle = triangle + init
+        yield triangle
 
 highestDivisorCount = 0
-for number in triangularNumberGenerator():
+for number in triangularNumberGenerator(1):
     divisorsCount = 0
     for inner in range(1, number + 1):
         if number % inner == 0:
